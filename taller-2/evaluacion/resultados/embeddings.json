@@ -1,0 +1,150 @@
+{
+  "minilm": {
+    "n_preguntas_con_evidencia": 23,
+    "evidencia@1": 0.572,
+    "fuente@1": 0.739,
+    "preguntas_completas@1": 11,
+    "evidencia@3": 0.79,
+    "fuente@3": 0.783,
+    "preguntas_completas@3": 16,
+    "evidencia@5": 0.877,
+    "fuente@5": 0.957,
+    "preguntas_completas@5": 19,
+    "MRR": 0.796,
+    "sim_top1_con_respuesta": {
+      "min": 0.355,
+      "media": 0.561
+    },
+    "sim_top1_sin_respuesta": {
+      "max": 0.59,
+      "media": 0.375,
+      "preguntas": [
+        "Q22",
+        "Q23",
+        "Q24"
+      ]
+    },
+    "margen_umbral": -0.235,
+    "fuga_sin_filtro_top3": 3,
+    "fuga_sin_filtro_top1": 3,
+    "preguntas_confidenciales": 4,
+    "ms_por_consulta": 26,
+    "modelo": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "dimension": 384,
+    "parametros_M": 118,
+    "max_tokens": 128,
+    "seg_carga_modelo": 5.1,
+    "seg_indexar_95_chunks": 4.1
+  },
+  "e5-small": {
+    "n_preguntas_con_evidencia": 23,
+    "evidencia@1": 0.79,
+    "fuente@1": 0.87,
+    "preguntas_completas@1": 16,
+    "evidencia@3": 0.87,
+    "fuente@3": 1,
+    "preguntas_completas@3": 19,
+    "evidencia@5": 0.957,
+    "fuente@5": 1,
+    "preguntas_completas@5": 22,
+    "MRR": 0.928,
+    "sim_top1_con_respuesta": {
+      "min": 0.834,
+      "media": 0.881
+    },
+    "sim_top1_sin_respuesta": {
+      "max": 0.841,
+      "media": 0.835,
+      "preguntas": [
+        "Q22",
+        "Q23",
+        "Q24"
+      ]
+    },
+    "margen_umbral": -0.007,
+    "fuga_sin_filtro_top3": 4,
+    "fuga_sin_filtro_top1": 3,
+    "preguntas_confidenciales": 4,
+    "ms_por_consulta": 25,
+    "modelo": "intfloat/multilingual-e5-small",
+    "dimension": 384,
+    "parametros_M": 118,
+    "max_tokens": 512,
+    "seg_carga_modelo": 22.2,
+    "seg_indexar_95_chunks": 4.4
+  },
+  "e5-base": {
+    "n_preguntas_con_evidencia": 23,
+    "evidencia@1": 0.703,
+    "fuente@1": 0.783,
+    "preguntas_completas@1": 14,
+    "evidencia@3": 0.957,
+    "fuente@3": 1,
+    "preguntas_completas@3": 21,
+    "evidencia@5": 0.978,
+    "fuente@5": 1,
+    "preguntas_completas@5": 22,
+    "MRR": 0.884,
+    "sim_top1_con_respuesta": {
+      "min": 0.82,
+      "media": 0.867
+    },
+    "sim_top1_sin_respuesta": {
+      "max": 0.842,
+      "media": 0.813,
+      "preguntas": [
+        "Q22",
+        "Q23",
+        "Q24"
+      ]
+    },
+    "margen_umbral": -0.022,
+    "fuga_sin_filtro_top3": 4,
+    "fuga_sin_filtro_top1": 3,
+    "preguntas_confidenciales": 4,
+    "ms_por_consulta": 57,
+    "modelo": "intfloat/multilingual-e5-base",
+    "dimension": 768,
+    "parametros_M": 278,
+    "max_tokens": 512,
+    "seg_carga_modelo": 27.8,
+    "seg_indexar_95_chunks": 14.9
+  },
+  "bge-m3": {
+    "n_preguntas_con_evidencia": 23,
+    "evidencia@1": 0.768,
+    "fuente@1": 0.739,
+    "preguntas_completas@1": 15,
+    "evidencia@3": 0.957,
+    "fuente@3": 1,
+    "preguntas_completas@3": 21,
+    "evidencia@5": 1.0,
+    "fuente@5": 1,
+    "preguntas_completas@5": 23,
+    "MRR": 0.87,
+    "sim_top1_con_respuesta": {
+      "min": 0.542,
+      "media": 0.656
+    },
+    "sim_top1_sin_respuesta": {
+      "max": 0.592,
+      "media": 0.521,
+      "preguntas": [
+        "Q22",
+        "Q23",
+        "Q24"
+      ]
+    },
+    "margen_umbral": -0.05,
+    "fuga_sin_filtro_top3": 4,
+    "fuga_sin_filtro_top1": 4,
+    "preguntas_confidenciales": 4,
+    "ms_por_consulta": 155,
+    "modelo": "BAAI/bge-m3",
+    "dimension": 1024,
+    "parametros_M": 568,
+    "max_tokens": 512,
+    "seg_carga_modelo": 65.9,
+    "seg_indexar_95_chunks": 71.2
+  }
+}

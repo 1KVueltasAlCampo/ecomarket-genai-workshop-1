@@ -5,5 +5,12 @@ langchain-chroma
 langchain-huggingface
 langchain-openai
 chromadb
+faiss-cpu
 sentence-transformers
 python-dotenv
+pypdf
+python-docx
+reportlab
+pandas
+matplotlib
+ipykernel

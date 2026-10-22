@@ -1,0 +1,18 @@
+flowchart TD
+    classDef cliente fill:#f3f4f6,stroke:#4b5563,color:#111
+    classDef agente fill:#dbeafe,stroke:#2563eb,color:#111
+    classDef herramienta fill:#dcfce7,stroke:#16a34a,color:#111
+    classDef respuesta fill:#ffffff,stroke:#6b7280,color:#111
+
+    M(["Mensaje del cliente"]):::cliente --> P{"PLANIFICADOR (agente)<br/>¿Qué necesita el cliente?"}:::agente
+    P -- "Duda de política o proceso<br/>Ej. C01: '¿Cuánto tarda el reembolso?'" --> I1["buscar_en_documentos<br/>consulta: 'tiempo de reembolso'"]:::herramienta
+    P -- "Dato de un producto<br/>Ej. C02: '¿Cuánto cuesta el termo familiar?'" --> I2["consultar_producto<br/>nombre: 'termo familiar'"]:::herramienta
+    P -- "Estado de un pedido<br/>Ej. C03: '¿Dónde está mi pedido ORD-006?'" --> I3["consultar_pedido<br/>numero_pedido: 'ORD-006'"]:::herramienta
+    P -- "Pregunta que mezcla varios datos<br/>Ej. C04: 'Dos termos a Medellín, ¿pago envío?'" --> I4["1. consultar_producto: precio<br/>2. buscar_en_documentos: umbral de la Zona 1<br/>3. calcular: 2 x 69900 frente a 120000"]:::herramienta
+    P -- "Quiere devolver un producto<br/>Ej. C05 a C09, C12 y C13" --> D["Flujo de devolución<br/>(figura 3)"]:::respuesta
+    P -- "Falta un dato<br/>Ej. C10: 'Quiero devolverlo'" --> Q["Pide el dato que falta<br/>sin llamar herramientas"]:::respuesta
+    P -- "Tema ajeno a EcoMarket<br/>Ej. C11: '¿Cuál es el precio del dólar?'" --> X["Declina con amabilidad<br/>sin llamar herramientas"]:::respuesta
+    I1 --> F["Respuesta final con los datos obtenidos<br/>y la fuente"]:::respuesta
+    I2 --> F
+    I3 --> F
+    I4 --> F

@@ -1,0 +1,621 @@
+{
+ "openai/gpt-oss-20b": {
+  "C01": {
+   "tokens": 1079,
+   "segundos": 0.61,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"buscar_en_documentos\",\"objetivo\":\"tiempo de procesamiento de reembolso después de recibir la devolución\"}]}",
+   "json_valido": true,
+   "plan": [
+    "buscar_en_documentos"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C02": {
+   "tokens": 1061,
+   "segundos": 0.61,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_producto\",\"objetivo\":\"precio y disponibilidad del termo familiar\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_producto"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C03": {
+   "tokens": 1054,
+   "segundos": 0.52,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"estado y datos del pedido ORD-006\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C04": {
+   "tokens": 1070,
+   "segundos": 0.49,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"buscar_en_documentos\",\"objetivo\":\"costo de envío a Medellín para dos termos de 500 ml\"}]}",
+   "json_valido": true,
+   "plan": [
+    "buscar_en_documentos"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": false,
+   "errores_validador": []
+  },
+  "C05": {
+   "tokens": 1122,
+   "segundos": 0.41,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-003\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-003 por motivo de no satisfacción\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-003\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C06": {
+   "tokens": 1158,
+   "segundos": 0.7,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-008\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-008 por motivo de aroma\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-008\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C07": {
+   "tokens": 1130,
+   "segundos": 0.45,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-011\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-011 por no uso\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-011\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C08": {
+   "tokens": 1132,
+   "segundos": 0.43,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-012\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-012 por daño del producto\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-012\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C09": {
+   "tokens": 1174,
+   "segundos": 0.52,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-999\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-999 por cambio de opinión\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-999\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C10": {
+   "tokens": 1039,
+   "segundos": 0.58,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[\"numero_pedido\",\"motivo\"],\"pasos\":[]}",
+   "json_valido": true,
+   "plan": [],
+   "intencion": "devolucion",
+   "datos_faltantes": [
+    "numero_pedido",
+    "motivo"
+   ],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "datos_faltantes_ok": true,
+   "errores_validador": []
+  },
+  "C11": {
+   "tokens": 1026,
+   "segundos": 0.52,
+   "crudo": "{\"intencion\":\"directo\",\"datos_faltantes\":[],\"pasos\":[]}",
+   "json_valido": true,
+   "plan": [],
+   "intencion": "directo",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C12": {
+   "tokens": 1187,
+   "segundos": 0.96,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-008\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-008 por cambio de opinión\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-008\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C13": {
+   "tokens": 1134,
+   "segundos": 0.48,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"datos del pedido ORD-014\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"elegibilidad de ORD-014 por motivo de no convencimiento\"},{\"herramienta\":\"calcular\",\"objetivo\":\"reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"etiqueta de devolución de ORD-014\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  }
+ },
+ "qwen/qwen3.8-27b": {
+  "C01": {
+   "tokens": 1000,
+   "segundos": 0.58,
+   "crudo": "{\n\"intencion\": \"informacion\",\n\"datos_faltantes\": [],\n\"pasos\": [\n{\"herramienta\": \"buscar_en_documentos\", \"objetivo\": \"plazos de procesamiento y acreditación del reembolso tras la recepción de la devolución\"}\n]\n}",
+   "json_valido": true,
+   "plan": [
+    "buscar_en_documentos"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C02": {
+   "tokens": 988,
+   "segundos": 0.43,
+   "crudo": "{\n\"intencion\": \"informacion\",\n\"datos_faltantes\": [],\n\"pasos\": [\n{\"herramienta\": \"consultar_producto\", \"objetivo\": \"precio y disponibilidad del termo familiar\"}\n]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_producto"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C03": {
+   "tokens": 993,
+   "segundos": 0.39,
+   "crudo": "{\n\"intencion\": \"informacion\",\n\"datos_faltantes\": [],\n\"pasos\": [\n{\"herramienta\": \"consultar_pedido\", \"objetivo\": \"estado y ubicación actual del pedido ORD-006\"}\n]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C04": {
+   "tokens": 1087,
+   "segundos": 0.58,
+   "crudo": "{\n  \"intencion\": \"informacion\",\n  \"datos_faltantes\": [],\n  \"pasos\": [\n    {\n      \"herramienta\": \"consultar_producto\",\n      \"objetivo\": \"precio del termo de 500 ml\"\n    },\n    {\n      \"herramienta\": \"buscar_en_documentos\",\n      \"objetivo\": \"política de envío gratis y costos para Medellín\"\n    },\n    {\n      \"herramienta\": \"calcular\",\n      \"objetivo\": \"subtotal de 2 termos para comparar con el umbral de envío gratis\"\n    }\n  ]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_producto",
+    "buscar_en_documentos",
+    "calcular"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C05": {
+   "tokens": 1076,
+   "segundos": 0.77,
+   "crudo": "{\n\"intencion\": \"devolucion\",\n\"datos_faltantes\": [],\n\"pasos\": [\n{\"herramienta\": \"consultar_pedido\", \"objetivo\": \"datos del pedido ORD-003\"},\n{\"herramienta\": \"verificar_elegibilidad_producto\", \"objetivo\": \"elegibilidad de ORD-003 por cambio de opinión\"},\n{\"herramienta\": \"calcular\", \"objetivo\": \"reembolso estimado\"},\n{\"herramienta\": \"generar_etiqueta_devolucion\", \"objetivo\": \"etiqueta de devolución de ORD-003\"}\n]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C06": {
+   "tokens": 1122,
+   "segundos": 1.01,
+   "crudo": "{\n  \"intencion\": \"devolucion\",\n  \"datos_faltantes\": [],\n  \"pasos\": [\n    {\n      \"herramienta\": \"consultar_pedido\",\n      \"objetivo\": \"datos del pedido ORD-008\"\n    },\n    {\n      \"herramienta\": \"verificar_elegibilidad_producto\",\n      \"objetivo\": \"elegibilidad de ORD-008 por cambio de opinión\"\n    },\n    {\n      \"herramienta\": \"calcular\",\n      \"objetivo\": \"reembolso estimado\"\n    },\n    {\n      \"herramienta\": \"generar_etiqueta_devolucion\",\n      \"objetivo\": \"etiqueta de devolución de ORD-008\"\n    }\n  ]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C07": {
+   "tokens": 1079,
+   "segundos": 1.03,
+   "crudo": "{\n\"intencion\": \"devolucion\",\n\"datos_faltantes\": [],\n\"pasos\": [\n{\"herramienta\": \"consultar_pedido\", \"objetivo\": \"datos del pedido ORD-011\"},\n{\"herramienta\": \"verificar_elegibilidad_producto\", \"objetivo\": \"elegibilidad de ORD-011 por cambio de opinión\"},\n{\"herramienta\": \"calcular\", \"objetivo\": \"reembolso estimado\"},\n{\"herramienta\": \"generar_etiqueta_devolucion\", \"objetivo\": \"etiqueta de devolución de ORD-011\"}\n]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C08": {
+   "tokens": 1125,
+   "segundos": 0.67,
+   "crudo": "{\n  \"intencion\": \"devolucion\",\n  \"datos_faltantes\": [],\n  \"pasos\": [\n    {\n      \"herramienta\": \"consultar_pedido\",\n      \"objetivo\": \"datos del pedido ORD-012\"\n    },\n    {\n      \"herramienta\": \"verificar_elegibilidad_producto\",\n      \"objetivo\": \"elegibilidad de ORD-012 por producto dañado\"\n    },\n    {\n      \"herramienta\": \"calcular\",\n      \"objetivo\": \"reembolso estimado\"\n    },\n    {\n      \"herramienta\": \"generar_etiqueta_devolucion\",\n      \"objetivo\": \"etiqueta de devolución de ORD-012\"\n    }\n  ]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C09": {
+   "tokens": 1116,
+   "segundos": 0.61,
+   "crudo": "{\n  \"intencion\": \"devolucion\",\n  \"datos_faltantes\": [],\n  \"pasos\": [\n    {\n      \"herramienta\": \"consultar_pedido\",\n      \"objetivo\": \"datos del pedido ORD-999\"\n    },\n    {\n      \"herramienta\": \"verificar_elegibilidad_producto\",\n      \"objetivo\": \"elegibilidad de ORD-999 por cambio de opinión\"\n    },\n    {\n      \"herramienta\": \"calcular\",\n      \"objetivo\": \"reembolso estimado\"\n    },\n    {\n      \"herramienta\": \"generar_etiqueta_devolucion\",\n      \"objetivo\": \"etiqueta de devolución de ORD-999\"\n    }\n  ]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C10": {
+   "tokens": 958,
+   "segundos": 0.47,
+   "crudo": "{\"intencion\": \"devolucion\", \"datos_faltantes\": [\"numero_pedido\", \"motivo\"], \"pasos\": []}",
+   "json_valido": true,
+   "plan": [],
+   "intencion": "devolucion",
+   "datos_faltantes": [
+    "numero_pedido",
+    "motivo"
+   ],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "datos_faltantes_ok": true,
+   "errores_validador": []
+  },
+  "C11": {
+   "tokens": 955,
+   "segundos": 0.67,
+   "crudo": "{\"intencion\": \"directo\", \"datos_faltantes\": [], \"pasos\": []}",
+   "json_valido": true,
+   "plan": [],
+   "intencion": "directo",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C12": {
+   "tokens": 1138,
+   "segundos": 0.77,
+   "crudo": "{\n  \"intencion\": \"devolucion\",\n  \"datos_faltantes\": [],\n  \"pasos\": [\n    {\n      \"herramienta\": \"consultar_pedido\",\n      \"objetivo\": \"datos del pedido ORD-008\"\n    },\n    {\n      \"herramienta\": \"verificar_elegibilidad_producto\",\n      \"objetivo\": \"elegibilidad de ORD-008 por cambio de opinión\"\n    },\n    {\n      \"herramienta\": \"calcular\",\n      \"objetivo\": \"reembolso estimado\"\n    },\n    {\n      \"herramienta\": \"generar_etiqueta_devolucion\",\n      \"objetivo\": \"etiqueta de devolución de ORD-008\"\n    }\n  ]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C13": {
+   "tokens": 1079,
+   "segundos": 0.63,
+   "crudo": "{\n\"intencion\": \"devolucion\",\n\"datos_faltantes\": [],\n\"pasos\": [\n{\"herramienta\": \"consultar_pedido\", \"objetivo\": \"datos del pedido ORD-014\"},\n{\"herramienta\": \"verificar_elegibilidad_producto\", \"objetivo\": \"elegibilidad de ORD-014 por cambio de opinión\"},\n{\"herramienta\": \"calcular\", \"objetivo\": \"reembolso estimado\"},\n{\"herramienta\": \"generar_etiqueta_devolucion\", \"objetivo\": \"etiqueta de devolución de ORD-014\"}\n]\n}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  }
+ },
+ "openai/gpt-oss-120b": {
+  "C01": {
+   "tokens": 1075,
+   "segundos": 1.02,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"buscar_en_documentos\",\"objetivo\":\"tiempo de reembolso después de recibir la devolución\"}]}",
+   "json_valido": true,
+   "plan": [
+    "buscar_en_documentos"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C02": {
+   "tokens": 1076,
+   "segundos": 0.86,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_producto\",\"objetivo\":\"precio y disponibilidad del termo familiar\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_producto"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C03": {
+   "tokens": 1060,
+   "segundos": 0.53,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"estado y datos del pedido ORD-006\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C04": {
+   "tokens": 1205,
+   "segundos": 0.9,
+   "crudo": "{\"intencion\":\"informacion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_producto\",\"objetivo\":\"precio del termo de 500 ml\"},{\"herramienta\":\"buscar_en_documentos\",\"objetivo\":\"costo de envío a Medellín y condiciones de envío gratis\"},{\"herramienta\":\"calcular\",\"objetivo\":\"determinar si el envío es gratuito al comprar 2 termos y, de no ser así, calcular el costo total del envío\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_producto",
+    "buscar_en_documentos",
+    "calcular"
+   ],
+   "intencion": "informacion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C05": {
+   "tokens": 1172,
+   "segundos": 0.73,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-003\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de ORD-003 por cambio de opinión\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para ORD-003\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C06": {
+   "tokens": 1166,
+   "segundos": 0.94,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-008\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de devolución por descontento con el aroma\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para el pedido ORD-008\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C07": {
+   "tokens": 1181,
+   "segundos": 0.87,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-011\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de devolución por motivo 'ya no lo uso'\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para ORD-011\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C08": {
+   "tokens": 1169,
+   "segundos": 0.69,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-012\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de devolución por daño en el mango\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para ORD-012\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C09": {
+   "tokens": 1178,
+   "segundos": 0.82,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-999\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de ORD-999 por cambio de opinión\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para ORD-999\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C10": {
+   "tokens": 1034,
+   "segundos": 0.69,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[\"numero_pedido\",\"motivo\"],\"pasos\":[]}",
+   "json_valido": true,
+   "plan": [],
+   "intencion": "devolucion",
+   "datos_faltantes": [
+    "numero_pedido",
+    "motivo"
+   ],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "datos_faltantes_ok": true,
+   "errores_validador": []
+  },
+  "C11": {
+   "tokens": 1039,
+   "segundos": 0.42,
+   "crudo": "{\"intencion\":\"directo\",\"datos_faltantes\":[],\"pasos\":[]}",
+   "json_valido": true,
+   "plan": [],
+   "intencion": "directo",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C12": {
+   "tokens": 1209,
+   "segundos": 0.8,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-008\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de ORD-008 por cambio de opinión\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para ORD-008\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  },
+  "C13": {
+   "tokens": 1190,
+   "segundos": 0.67,
+   "crudo": "{\"intencion\":\"devolucion\",\"datos_faltantes\":[],\"pasos\":[{\"herramienta\":\"consultar_pedido\",\"objetivo\":\"obtener datos del pedido ORD-014\"},{\"herramienta\":\"verificar_elegibilidad_producto\",\"objetivo\":\"verificar elegibilidad de devolución por insatisfacción del termo\"},{\"herramienta\":\"calcular\",\"objetivo\":\"calcular reembolso estimado\"},{\"herramienta\":\"generar_etiqueta_devolucion\",\"objetivo\":\"generar etiqueta de devolución para el pedido ORD-014\"}]}",
+   "json_valido": true,
+   "plan": [
+    "consultar_pedido",
+    "verificar_elegibilidad_producto",
+    "calcular",
+    "generar_etiqueta_devolucion"
+   ],
+   "intencion": "devolucion",
+   "datos_faltantes": [],
+   "intencion_ok": true,
+   "pasos_ok": true,
+   "errores_validador": []
+  }
+ }
+}

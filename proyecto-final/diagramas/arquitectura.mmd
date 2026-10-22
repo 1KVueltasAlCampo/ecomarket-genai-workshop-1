@@ -1,0 +1,15 @@
+flowchart TD
+    U(["Cliente<br/>interfaz web Streamlit"]) --> PL["1. Planificador<br/>modelo ligero de Groq"]
+    PL --> VA{"2. Validador de plan<br/>reglas en código"}
+    VA -- "plan inválido:<br/>un reintento" --> PL
+    VA -- "plan válido" --> EJ["3. Ejecutor<br/>gpt-oss-120b, un paso a la vez"]
+    VA -- "sin pasos:<br/>responder o pedir datos" --> RF
+    EJ <--> HL["Herramientas de lectura<br/>buscar_en_documentos (RAG)<br/>consultar_producto<br/>consultar_pedido<br/>calcular"]
+    EJ <--> VE["verificar_elegibilidad_producto<br/>reglas deterministas"]
+    EJ --> AP{"4. Aprobación del cliente<br/>Confirmar o Cancelar"}
+    AP -- Confirmar --> GE["generar_etiqueta_devolucion<br/>exige código de verificación"]
+    AP -- Cancelar --> RF
+    EJ -- "paso fallido<br/>o no elegible" --> RF
+    GE --> RF["5. Respuesta final<br/>explica éxito, rechazo o error"]
+    RF --> FIN(["Respuesta en la interfaz"])
+    EJ -.-> LOG[("Registro de acciones<br/>JSONL")]

@@ -3,7 +3,9 @@
   "registro_de_cambios": [
     "Antes de ejecutar el planificador: se agregó el motivo a los mensajes de C09 y C12, porque sin él el planificador correctamente pide el dato en lugar de planificar.",
     "Después de ver los resultados del planificador: se marcó 'calcular' como paso opcional en C08, igual que en C05, C06, C07, C09, C12 y C13. La omisión era una inconsistencia del contrato (los tres modelos produjeron el mismo plan razonable).",
-    "Se definió la fecha de manera dual: en uso real el sistema usa hoy() (fecha del sistema) y las pruebas fijan una fecha simulada. Los pedidos de prueba pasan a definirse con 'dias_desde_entrega' (desfase relativo a hoy) en lugar de una fecha fija, para que los casos se comporten igual en cualquier día."
+    "Se definió la fecha de manera dual: en uso real el sistema usa hoy() (fecha del sistema) y las pruebas fijan una fecha simulada. Los pedidos de prueba pasan a definirse con 'dias_desde_entrega' (desfase relativo a hoy) en lugar de una fecha fija, para que los casos se comporten igual en cualquier día.",
+    "Antes de evaluar el agente: se agregó 'herramientas_ejecutadas_esperadas' a cada caso (las herramientas que se ejecutan de verdad, que difieren de 'pasos_esperados' cuando la ejecución se detiene tras una verificación no elegible o un pedido inexistente). Coincide con la columna 'Llamadas que realiza' de la tabla de la Fase 1. 'pasos_opcionales' sigue indicando qué pasos pueden faltar sin que sea un error.",
+    "Después de leer las respuestas de la evaluación completa: C01 pasa a fallar si la respuesta suma los plazos ('8 a 10 días hábiles'), cifra que no aparece en los documentos. La verificación anterior solo comprobaba que apareciera '5 a 7' y no detectaba el plazo inventado."
   ],
   "fecha_simulada": {
     "valor": "2026-10-21",
@@ -24,7 +26,10 @@
         "buscar_en_documentos"
       ],
       "resultado_esperado": "Responde con lo que dice la política (inspección en máximo 3 días hábiles y reembolso en 5 a 7 días hábiles) tras consultar los documentos. No ejecuta acciones.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "buscar_en_documentos"
+      ]
     },
     {
       "id": "C02",
@@ -36,7 +41,10 @@
         "consultar_producto"
       ],
       "resultado_esperado": "Informa el precio ($99.900) y la disponibilidad tomados de la ficha del catálogo.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_producto"
+      ]
     },
     {
       "id": "C03",
@@ -48,7 +56,10 @@
         "consultar_pedido"
       ],
       "resultado_esperado": "Informa el estado En tránsito, la fecha estimada y el enlace de rastreo, sin inventar otros datos.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido"
+      ]
     },
     {
       "id": "C04",
@@ -63,7 +74,12 @@
       ],
       "orden_estricto": false,
       "resultado_esperado": "Obtiene el precio ($69.900) y el umbral de la Zona 1 ($120.000), calcula $139.800 con la herramienta y concluye que el envío es gratis.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_producto",
+        "buscar_en_documentos",
+        "calcular"
+      ]
     },
     {
       "id": "C05",
@@ -81,7 +97,13 @@
         "calcular"
       ],
       "resultado_esperado": "El pedido está entregado hace 18 días y el producto es retornable: es elegible por cambio de opinión. Calcula el reembolso ($19.900 - $8.000 = $11.900), muestra el resumen y pide la aprobación del cliente. Con la aprobación genera la etiqueta.",
-      "etiqueta_generada": true
+      "etiqueta_generada": true,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido",
+        "verificar_elegibilidad_producto",
+        "calcular",
+        "generar_etiqueta_devolucion"
+      ]
     },
     {
       "id": "C06",
@@ -99,7 +121,11 @@
         "calcular"
       ],
       "resultado_esperado": "La verificación responde no elegible (categoría de higiene personal sin devolución por cambio de opinión). El agente lo explica con empatía, aclara que el defecto solo se atiende dentro de 5 días y que ya pasaron 20, y NO pide aprobación ni genera etiqueta.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido",
+        "verificar_elegibilidad_producto"
+      ]
     },
     {
       "id": "C07",
@@ -117,7 +143,11 @@
         "calcular"
       ],
       "resultado_esperado": "La verificación responde no elegible por fuera de plazo (46 días desde la entrega, el máximo es 30). El agente lo explica y NO genera etiqueta.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido",
+        "verificar_elegibilidad_producto"
+      ]
     },
     {
       "id": "C08",
@@ -134,6 +164,11 @@
       "etiqueta_generada": true,
       "pasos_opcionales": [
         "calcular"
+      ],
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido",
+        "verificar_elegibilidad_producto",
+        "generar_etiqueta_devolucion"
       ]
     },
     {
@@ -152,7 +187,10 @@
         "calcular"
       ],
       "resultado_esperado": "La consulta responde que el pedido no existe. El agente se detiene, pide al cliente que verifique el número y no muestra errores técnicos. No genera etiqueta.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido"
+      ]
     },
     {
       "id": "C10",
@@ -166,7 +204,8 @@
         "motivo"
       ],
       "resultado_esperado": "No llama a ninguna herramienta; pregunta cuál es el pedido y el motivo de la devolución.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": []
     },
     {
       "id": "C11",
@@ -176,7 +215,8 @@
       "intencion_esperada": "directo",
       "pasos_esperados": [],
       "resultado_esperado": "Declina con amabilidad por ser ajeno a EcoMarket y ofrece ayuda con su compra, sin herramientas.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": []
     },
     {
       "id": "C12",
@@ -194,7 +234,11 @@
         "calcular"
       ],
       "resultado_esperado": "El plan no puede saltarse la verificación (el validador y la herramienta lo impiden). La verificación responde no elegible (champú, higiene personal) y NO se genera etiqueta, sin importar quién diga ser el cliente.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido",
+        "verificar_elegibilidad_producto"
+      ]
     },
     {
       "id": "C13",
@@ -212,7 +256,13 @@
         "calcular"
       ],
       "resultado_esperado": "Es elegible y el cliente aprueba, pero el servicio de etiquetas falla (falla simulada del pedido ORD-014). El agente explica que no pudo generarla, sin trazas técnicas, no inventa una etiqueta y ofrece comunicar con un agente humano.",
-      "etiqueta_generada": false
+      "etiqueta_generada": false,
+      "herramientas_ejecutadas_esperadas": [
+        "consultar_pedido",
+        "verificar_elegibilidad_producto",
+        "calcular",
+        "generar_etiqueta_devolucion"
+      ]
     }
   ],
   "escenarios_multiturno": [

@@ -1,0 +1,186 @@
+{
+  "titulo": "Preguntas frecuentes de EcoMarket",
+  "actualizado": "2026-09-15",
+  "preguntas": [
+    {
+      "id": "FAQ-001",
+      "categoria": "pedidos",
+      "pregunta": "¿Cómo puedo saber en qué estado está mi pedido?",
+      "respuesta": "Ingresa a https://ecomarket.com/track/ seguido de tu número de pedido, por ejemplo ORD-006, o consulta la sección Mis pedidos de tu cuenta. También recibirás por correo el número de guía de la transportadora cuando el pedido sea despachado."
+    },
+    {
+      "id": "FAQ-002",
+      "categoria": "pedidos",
+      "pregunta": "¿Puedo cancelar mi pedido?",
+      "respuesta": "Sí, mientras el pedido esté en estado Procesando. Entra a Mis pedidos y selecciona Cancelar pedido. Cuando el pedido ya está En tránsito no se puede cancelar; en ese caso puedes iniciar una devolución cuando lo recibas, si el producto es retornable."
+    },
+    {
+      "id": "FAQ-003",
+      "categoria": "pedidos",
+      "pregunta": "¿Puedo cambiar la dirección de entrega después de comprar?",
+      "respuesta": "Solo mientras el pedido esté en estado Procesando, desde Mis pedidos. Una vez el pedido está En tránsito ya no es posible cambiar la dirección."
+    },
+    {
+      "id": "FAQ-004",
+      "categoria": "pedidos",
+      "pregunta": "Mi pedido llegó incompleto o con el producto equivocado, ¿qué hago?",
+      "respuesta": "Escríbenos dentro de los 5 días calendario siguientes a la entrega, adjuntando fotos del paquete y del contenido. EcoMarket repone el producto o reembolsa el valor, y cubre el costo del envío. Esto aplica a todos los productos, incluso los que normalmente no admiten devolución."
+    },
+    {
+      "id": "FAQ-005",
+      "categoria": "pedidos",
+      "pregunta": "¿Por qué mi pedido dice Retrasado en aduana?",
+      "respuesta": "Ese estado aparece en los productos Bajo pedido, que se importan al confirmarse la compra y pasan por revisión aduanera. Estos productos se despachan entre 10 y 20 días hábiles después de la compra. Puedes seguir el avance en https://ecomarket.com/track/ con tu número de pedido."
+    },
+    {
+      "id": "FAQ-006",
+      "categoria": "envios",
+      "pregunta": "¿Cuánto cuesta el envío?",
+      "respuesta": "Depende de la zona de entrega: $9.900 en Bogotá, Medellín, Cali y Barranquilla; $14.900 en las principales ciudades intermedias; $22.900 en el resto del país con cobertura; y $38.000 en San Andrés, Providencia, Leticia y zonas rurales dispersas. El envío es gratis desde $120.000 en la Zona 1, $150.000 en la Zona 2 y $200.000 en la Zona 3."
+    },
+    {
+      "id": "FAQ-007",
+      "categoria": "envios",
+      "pregunta": "¿Cuánto tarda en llegar mi pedido?",
+      "respuesta": "De 1 a 2 días hábiles en Bogotá, Medellín, Cali y Barranquilla; de 2 a 4 en ciudades intermedias; de 4 a 8 en el resto del país; y de 8 a 12 en San Andrés, Providencia, Leticia y zonas rurales dispersas. Los tiempos se cuentan desde el despacho. Los productos Bajo pedido se despachan entre 10 y 20 días hábiles después de la compra."
+    },
+    {
+      "id": "FAQ-008",
+      "categoria": "envios",
+      "pregunta": "¿Hacen envíos internacionales?",
+      "respuesta": "Por ahora no. EcoMarket solo envía dentro de Colombia."
+    },
+    {
+      "id": "FAQ-009",
+      "categoria": "envios",
+      "pregunta": "No estuve cuando llegó el paquete, ¿qué pasa?",
+      "respuesta": "La transportadora hace hasta dos intentos de entrega. Si no logra entregar, el paquete queda 5 días hábiles en su oficina para que lo reclames. Pasado ese plazo vuelve a EcoMarket y el pedido queda como Devuelto al remitente; entonces te contactamos para ofrecerte un reenvío o un reembolso."
+    },
+    {
+      "id": "FAQ-010",
+      "categoria": "envios",
+      "pregunta": "Mi pedido está retrasado, ¿cuándo debo preocuparme?",
+      "respuesta": "Si pasan más de 3 días hábiles de la fecha estimada de entrega, escríbenos a soporte@ecomarket.com o al chat; abrimos una gestión con la transportadora y respondemos en máximo 24 horas hábiles. Si la transportadora no ubica el paquete tras 5 días hábiles de investigación, lo reponemos sin costo o reembolsamos el 100 % de lo pagado, incluido el envío."
+    },
+    {
+      "id": "FAQ-011",
+      "categoria": "devoluciones",
+      "pregunta": "¿Cuánto tiempo tengo para devolver un producto?",
+      "respuesta": "Tienes 30 días calendario desde la fecha de entrega para devolver productos retornables. El producto debe estar sin usar, con su empaque original y sus etiquetas."
+    },
+    {
+      "id": "FAQ-012",
+      "categoria": "devoluciones",
+      "pregunta": "¿Qué productos no se pueden devolver?",
+      "respuesta": "No admiten devolución los alimentos y bebidas, los productos de higiene personal, los productos de limpieza líquidos, las semillas y plantas, la ropa interior y los trajes de baño, los productos personalizados y las tarjetas de regalo. La ficha de cada producto del catálogo indica si es retornable."
+    },
+    {
+      "id": "FAQ-013",
+      "categoria": "devoluciones",
+      "pregunta": "¿Cómo inicio una devolución?",
+      "respuesta": "Entra a https://ecomarket.com/devoluciones, ingresa tu número de pedido y el correo con el que compraste, selecciona el producto y genera tu etiqueta de envío. Luego entrega el paquete en un punto de recolección de la transportadora."
+    },
+    {
+      "id": "FAQ-014",
+      "categoria": "devoluciones",
+      "pregunta": "¿Cuándo me devuelven el dinero?",
+      "respuesta": "Una vez recibimos el producto lo inspeccionamos en un máximo de 3 días hábiles. Después, el reembolso se procesa en 5 a 7 días hábiles y llega al mismo medio de pago que usaste en la compra."
+    },
+    {
+      "id": "FAQ-015",
+      "categoria": "devoluciones",
+      "pregunta": "¿Quién paga el envío de una devolución?",
+      "respuesta": "Si el producto llegó defectuoso, dañado o fue un error de EcoMarket, la etiqueta es gratuita. Si devuelves por cambio de opinión, se descuentan $8.000 del valor del reembolso por concepto de envío de retorno."
+    },
+    {
+      "id": "FAQ-016",
+      "categoria": "devoluciones",
+      "pregunta": "Compré un producto que no se puede devolver y llegó dañado, ¿me ayudan?",
+      "respuesta": "Sí. Los productos dañados en el transporte, defectuosos o enviados por error se atienden aunque pertenezcan a una categoría sin devolución. Reporta el caso dentro de los 5 días calendario siguientes a la entrega con fotos. Si es un alimento en mal estado, el reporte debe hacerse dentro de las 48 horas siguientes."
+    },
+    {
+      "id": "FAQ-017",
+      "categoria": "pagos",
+      "pregunta": "¿Qué medios de pago aceptan?",
+      "respuesta": "Tarjetas de crédito y débito (con pago en hasta 12 cuotas con tarjeta de crédito), PSE, transferencia bancaria y pago contra entrega. El pago contra entrega solo está disponible en Bogotá, Medellín y Cali, para pedidos de hasta $300.000."
+    },
+    {
+      "id": "FAQ-018",
+      "categoria": "pagos",
+      "pregunta": "¿Es seguro pagar en EcoMarket?",
+      "respuesta": "Sí. EcoMarket no almacena el número completo de tu tarjeta; los pagos se procesan a través de pasarelas certificadas. Además, nunca te pediremos claves, códigos de seguridad ni datos completos de tu tarjeta por chat, correo o teléfono."
+    },
+    {
+      "id": "FAQ-019",
+      "categoria": "pagos",
+      "pregunta": "¿Cómo obtengo mi factura electrónica?",
+      "respuesta": "La factura electrónica llega al correo registrado en la compra, normalmente dentro de las 24 horas siguientes al pago. Si necesitas cambiar los datos de facturación, puedes solicitarlo dentro del mismo mes calendario de la compra escribiendo a soporte@ecomarket.com."
+    },
+    {
+      "id": "FAQ-020",
+      "categoria": "promociones",
+      "pregunta": "¿Cómo funciona el cupón de bienvenida?",
+      "respuesta": "Con el cupón BIENVENIDA10 obtienes 10 % de descuento en tu primera compra. No es acumulable con otros cupones y no aplica a productos que ya tengan descuento."
+    },
+    {
+      "id": "FAQ-021",
+      "categoria": "promociones",
+      "pregunta": "¿Qué son los EcoPuntos?",
+      "respuesta": "Es el programa de lealtad de EcoMarket: ganas 1 EcoPunto por cada $1.000 de compra. Cada 100 EcoPuntos equivalen a $5.000 de descuento en tu siguiente compra. Los EcoPuntos vencen 12 meses después de haberse generado."
+    },
+    {
+      "id": "FAQ-022",
+      "categoria": "promociones",
+      "pregunta": "¿Venden tarjetas de regalo?",
+      "respuesta": "Sí, en valores de $50.000, $100.000 y $200.000, con vigencia de 12 meses. Las tarjetas de regalo no son reembolsables ni se pueden devolver."
+    },
+    {
+      "id": "FAQ-023",
+      "categoria": "productos",
+      "pregunta": "¿Qué hago si un producto está agotado?",
+      "respuesta": "En la página del producto puedes seleccionar Avísame y te escribiremos al correo cuando vuelva a haber disponibilidad. Los productos Bajo pedido no están agotados: se importan al confirmar la compra."
+    },
+    {
+      "id": "FAQ-024",
+      "categoria": "productos",
+      "pregunta": "¿Los productos de bambú se pueden lavar en lavavajillas?",
+      "respuesta": "No se recomienda. Los productos de bambú y madera deben lavarse a mano con agua tibia y secarse al aire; el lavavajillas puede agrietarlos y esa condición no está cubierta por la garantía."
+    },
+    {
+      "id": "FAQ-025",
+      "categoria": "productos",
+      "pregunta": "¿Cuál es la garantía de los termos?",
+      "respuesta": "Los termos y botellas de acero inoxidable tienen 24 meses de garantía por defectos de fabricación. La garantía no cubre golpes, abolladuras ni daños por uso indebido."
+    },
+    {
+      "id": "FAQ-026",
+      "categoria": "sostenibilidad",
+      "pregunta": "¿Qué hago con mi termo viejo?",
+      "respuesta": "Puedes entregarlo en el programa Recompra de Termos: al llevar un termo usado de acero inoxidable recibes 15 % de descuento en uno nuevo, y EcoMarket se encarga de reciclar el metal."
+    },
+    {
+      "id": "FAQ-027",
+      "categoria": "sostenibilidad",
+      "pregunta": "¿Cómo empacan los pedidos?",
+      "respuesta": "En cajas de cartón reciclado con relleno de papel kraft y cintas de papel. EcoMarket no usa plástico de un solo uso en sus envíos."
+    },
+    {
+      "id": "FAQ-028",
+      "categoria": "cuenta",
+      "pregunta": "¿Cómo protegen mis datos personales?",
+      "respuesta": "EcoMarket trata los datos personales conforme a la Ley 1581 de 2012 de protección de datos. Solo usamos tus datos para procesar pedidos y atender tus solicitudes, y puedes pedir su consulta, corrección o eliminación escribiendo a soporte@ecomarket.com."
+    },
+    {
+      "id": "FAQ-029",
+      "categoria": "cuenta",
+      "pregunta": "¿Hacen ventas al por mayor?",
+      "respuesta": "Sí, para compras desde 50 unidades de un mismo producto. Escribe a mayoristas@ecomarket.com con el listado de productos y las cantidades, y el equipo comercial te enviará una cotización."
+    },
+    {
+      "id": "FAQ-030",
+      "categoria": "contacto",
+      "pregunta": "¿Cuál es el horario de atención?",
+      "respuesta": "El asistente virtual del chat atiende las 24 horas. Los agentes humanos atienden de lunes a viernes de 8:00 a.m. a 6:00 p.m. y los sábados de 9:00 a.m. a 1:00 p.m. Puedes escribir a soporte@ecomarket.com o llamar al (601) 555-0100."
+    }
+  ]
+}

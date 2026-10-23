@@ -4,7 +4,7 @@ flowchart TD
     classDef herramienta fill:#dcfce7,stroke:#16a34a,color:#111
     classDef respuesta fill:#ffffff,stroke:#6b7280,color:#111
 
-    M(["Mensaje del cliente"]):::cliente --> P{"PLANIFICADOR (agente)<br/>¿Qué necesita el cliente?"}:::agente
+    M(["Mensaje del cliente<br/>+ memoria de la conversación"]):::cliente --> P{"PLANIFICADOR (agente)<br/>¿Qué necesita el cliente?<br/>(considera lo ya dicho)"}:::agente
     P -- "Duda de política o proceso<br/>Ej. C01: '¿Cuánto tarda el reembolso?'" --> I1["buscar_en_documentos<br/>consulta: 'tiempo de reembolso'"]:::herramienta
     P -- "Dato de un producto<br/>Ej. C02: '¿Cuánto cuesta el termo familiar?'" --> I2["consultar_producto<br/>nombre: 'termo familiar'"]:::herramienta
     P -- "Estado de un pedido<br/>Ej. C03: '¿Dónde está mi pedido ORD-006?'" --> I3["consultar_pedido<br/>numero_pedido: 'ORD-006'"]:::herramienta

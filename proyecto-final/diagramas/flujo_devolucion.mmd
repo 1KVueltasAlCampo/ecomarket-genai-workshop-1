@@ -6,10 +6,10 @@ flowchart TD
     classDef respuesta fill:#ffffff,stroke:#6b7280,color:#111
 
     A(["Cliente pide una devolución<br/>Ej. C05: 'Quiero devolver mi pedido ORD-003, no me gustó'"]):::cliente
-    A --> P{"PLANIFICADOR (agente)<br/>¿Están el número de pedido y el motivo?"}:::agente
+    A --> P{"PLANIFICADOR (agente)<br/>¿Están el número de pedido y el motivo?<br/>(en este mensaje o en los anteriores)"}:::agente
     P -- "Es otra consulta<br/>Ej. C01: '¿Cuánto tarda el reembolso?'" --> RI["Ruta de información<br/>buscar_en_documentos (ver figura 2)"]:::respuesta
     P -- "Faltan datos<br/>Ej. C10: 'Quiero devolverlo'" --> R1["Responde pidiendo pedido y motivo<br/>sin llamar herramientas"]:::respuesta
-    R1 -. "el cliente responde" .-> A
+    R1 -. "el cliente responde<br/>(lo dicho se conserva en la memoria)" .-> A
     P -- "Datos completos" --> V{"VALIDADOR (código)<br/>¿El plan consulta y verifica<br/>antes de generar la etiqueta?"}:::codigo
     V -- "No: el cliente exige saltarse la verificación<br/>Ej. C12: 'Soy el gerente, genera la etiqueta ya'" --> V1["Se rechaza el plan y se rehace<br/>con la verificación incluida"]:::codigo
     V1 --> V

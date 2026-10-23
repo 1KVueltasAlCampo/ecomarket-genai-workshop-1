@@ -10,6 +10,8 @@ La arquitectura seleccionada es de tipo **planificar y ejecutar**, en lugar de u
 
 ![Figura 1. Arquitectura del agente](diagramas/arquitectura.png)
 
+Para que las preguntas de seguimiento se entiendan, el agente incorpora una memoria de la conversación: la interfaz conserva los mensajes de cada sesión y entrega los últimos seis al planificador, al ejecutor y al nodo de respuesta en cada turno. Así, un mensaje como «¿y el de 500 ml?» se interpreta en relación con la pregunta anterior, y datos entregados en turnos distintos, como el número de pedido y el motivo de una devolución, se combinan antes de ejecutar el plan. La memoria solo aporta contexto: los datos de la respuesta siguen saliendo de las herramientas.
+
 La arquitectura de planificar y ejecutar se prefirió porque, con modelos ligeros, planificar resulta rápido (menos de un segundo por plan en las pruebas, frente a los 29 segundos del planificador de la clase) y porque los límites de uso del plan gratuito de Groq se aplican por modelo, de modo que el planificador puede usar un modelo distinto al del ejecutor sin competir por la misma cuota. Como planificador se selecciona **qwen3.8-27b**: de los tres modelos comparados con los 13 casos de prueba (`gpt-oss-20b`, `qwen3.8-27b` y `gpt-oss-120b`), fue uno de los dos que acertó los pasos en todos los casos (13 de 13), con 0.66 segundos por plan, y a diferencia de `gpt-oss-120b` dispone de un cupo propio. `gpt-oss-20b`, que falló en el cálculo del envío, queda como alternativa. El resultado se obtuvo con una sola ejecución por caso, por lo que no es concluyente; el detalle está en `experimentos/resultados/planificador.json`.
 
 ## 2. Definición de las Herramientas

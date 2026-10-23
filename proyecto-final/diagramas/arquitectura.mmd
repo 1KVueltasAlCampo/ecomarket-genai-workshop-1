@@ -13,3 +13,7 @@ flowchart TD
     GE --> RF["5. Respuesta final<br/>explica éxito, rechazo o error"]
     RF --> FIN(["Respuesta en la interfaz"])
     EJ -.-> LOG[("Registro de acciones<br/>JSONL")]
+    FIN -. "cada turno se guarda" .-> MEM[("Memoria de la conversación<br/>últimos 6 mensajes")]
+    MEM -. "contexto" .-> PL
+    MEM -. "contexto" .-> EJ
+    MEM -. "contexto" .-> RF

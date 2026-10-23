@@ -3,7 +3,7 @@
 Juan David Cruz Garcia - A00368421 · Trabajo individual
 Maestría en Inteligencia Artificial Aplicada · Inteligencia Artificial Generativa
 
-Este repositorio desarrolla un caso de estudio sobre la mejora de la atención al cliente de EcoMarket, una tienda en línea (ficticia) de productos sostenibles. El Taller 1 explora un modelo de lenguaje con ingeniería de prompts, y el Taller 2 le incorpora un sistema RAG para que responda con la información de la empresa.
+Este repositorio desarrolla un caso de estudio sobre la mejora de la atención al cliente de EcoMarket, una tienda en línea (ficticia) de productos sostenibles. El Taller 1 explora un modelo de lenguaje con ingeniería de prompts, el Taller 2 le incorpora un sistema RAG para que responda con la información de la empresa y el Proyecto Final lo convierte en un agente que puede actuar (verificar una devolución y generar su etiqueta, con aprobación del cliente).
 
 ## Estructura del repositorio
 
@@ -45,6 +45,8 @@ Este repositorio desarrolla un caso de estudio sobre la mejora de la atención a
 ```
 
 El Taller 1 permanece intacto en su carpeta. El Taller 2 se construye sobre su caso y reutiliza sus datos, es decir, los 10 pedidos de prueba y el modelo de lenguaje.
+
+Junto a esas dos carpetas se encuentra `proyecto-final/`, que contiene el agente de devoluciones, su interfaz en Streamlit, las pruebas y los cuatro documentos de las fases del Proyecto Final (diseño, implementación, análisis crítico y despliegue). Copia sin cambios los módulos de ingesta del Taller 2 y le agrega el agente; su instalación y uso se explican en `proyecto-final/README.md`.
 
 ## Pruebas, experimentos y resultados
 

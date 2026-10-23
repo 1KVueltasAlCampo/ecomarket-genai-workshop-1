@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Ardi">
+  <circle cx="60" cy="60" r="60" fill="#4F82D0"/>
+  <circle cx="36" cy="30" r="14" fill="#B97B49"/>
+  <circle cx="36" cy="31" r="7.5" fill="#E6BE92"/>
+  <circle cx="84" cy="30" r="14" fill="#B97B49"/>
+  <circle cx="84" cy="31" r="7.5" fill="#E6BE92"/>
+  <ellipse cx="60" cy="62" rx="40" ry="36" fill="#B97B49"/>
+  <circle cx="33" cy="74" r="14" fill="#EBCB9F"/>
+  <circle cx="87" cy="74" r="14" fill="#EBCB9F"/>
+  <ellipse cx="60" cy="72" rx="30" ry="24" fill="#EBCB9F"/>
+  <path d="M60 36 C46 36 36 46 36 58 C46 54 54 56 60 62 C66 56 74 54 84 58 C84 46 74 36 60 36 Z" fill="#EBCB9F"/>
+  <ellipse cx="47" cy="55" rx="9.5" ry="12" fill="#FFFFFF" stroke="#2A2118" stroke-width="1.5"/>
+  <ellipse cx="73" cy="55" rx="9.5" ry="12" fill="#FFFFFF" stroke="#2A2118" stroke-width="1.5"/>
+  <circle cx="49.5" cy="50.5" r="5" fill="#6F9B5E"/>
+  <circle cx="75.5" cy="50.5" r="5" fill="#6F9B5E"/>
+  <circle cx="50" cy="50" r="3" fill="#15110D"/>
+  <circle cx="76" cy="50" r="3" fill="#15110D"/>
+  <ellipse cx="60" cy="68" rx="5" ry="3.5" fill="#D98A7B"/>
+  <path d="M44 75 Q60 96 76 75 Q60 80 44 75 Z" fill="#8A3A3A" stroke="#2A2118" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="56" y="76" width="8" height="8" rx="2" fill="#FFFFFF" stroke="#2A2118" stroke-width="1.2"/>
+  <line x1="60" y1="76" x2="60" y2="84" stroke="#2A2118" stroke-width="1"/>
+</svg>

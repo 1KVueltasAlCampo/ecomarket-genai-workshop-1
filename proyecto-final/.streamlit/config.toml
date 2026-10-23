@@ -1,0 +1,18 @@
+[theme]
+base = "dark"
+primaryColor = "#4F82D0"
+backgroundColor = "#171717"
+secondaryBackgroundColor = "#232019"
+textColor = "#F3E6D3"
+font = "sans serif"
+
+[server]
+# El vigilante de archivos recorre los módulos de transformers y llena la terminal de errores por torchvision,
+# que este proyecto no usa. Solo sirve para recargar al editar el código.
+fileWatcherType = "none"
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false

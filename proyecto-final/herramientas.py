@@ -66,6 +66,22 @@ def registrar(evento: dict):
         f.write(json.dumps(linea, ensure_ascii=False, default=str) + "\n")
 
 
+def leer_registro(prefijo_hilo: str, ultimas: int = 3000) -> list:
+    """Eventos de las conversaciones cuyo identificador empieza por el prefijo, en orden cronológico.
+    Solo se leen las últimas líneas del archivo: el registro crece y la interfaz lo consulta en cada interacción."""
+    if not REGISTRO.exists():
+        return []
+    eventos = []
+    for linea in REGISTRO.read_text(encoding="utf-8").splitlines()[-ultimas:]:
+        try:
+            evento = json.loads(linea)
+        except json.JSONDecodeError:
+            continue
+        if str(evento.get("hilo") or "").startswith(prefijo_hilo):
+            eventos.append(evento)
+    return eventos
+
+
 # --- Datos -----------------------------------------------------------------------------------
 @lru_cache(maxsize=1)
 def _catalogo():
@@ -92,15 +108,25 @@ def _pedido(numero):
 _indice = None
 
 
+def preparar_indice():
+    """Abre el índice vectorial del Taller 2. Si está vacío (primera ejecución en un clon limpio), lo construye
+    con los documentos de base_conocimiento/, igual que `python ingesta.py`."""
+    global _indice
+    from ingesta import abrir_indice, construir_indice
+    _indice = abrir_indice("bge-m3")
+    if _indice._collection.count() == 0:
+        from cargadores import cargar_base
+        _indice = construir_indice("bge-m3", cargar_base(), _indice._embedding_function)
+    return _indice
+
+
 @tool
 def buscar_en_documentos(consulta: str, tema: Optional[Literal["devoluciones", "envios", "garantias", "faq", "catalogo"]] = None) -> dict:
     """Busca en los documentos de EcoMarket (políticas de devoluciones, envíos y garantías, preguntas
     frecuentes y catálogo). Úsala para reglas, plazos, costos, tiempos y procesos. Formula una consulta
     corta y específica por cada dato que necesites. El parámetro tema es opcional y acota la búsqueda a un documento."""
-    global _indice
     if _indice is None:
-        from ingesta import abrir_indice
-        _indice = abrir_indice("bge-m3")
+        preparar_indice()
     filtro = {"audiencia": "publico"}
     if tema:
         filtro = {"$and": [{"audiencia": "publico"}, {"fuente": TEMAS[tema]}]}
@@ -206,20 +232,22 @@ def verificar_elegibilidad_producto(numero_pedido: str, motivo: Literal["cambio_
     if p["estado"] != "Entregado":
         return {**base, "elegible": False, "razon": "NO_ENTREGADO", "detalle": f"El pedido está '{p['estado']}': solo se pueden devolver pedidos entregados."}
     dias = p["entregado_hace_dias"]
+    plazo_defecto = PLAZO_DEFECTO_ALIMENTOS if producto["categoria"] == "Alimentos y Bebidas" else PLAZO_DEFECTO
+    # Un defecto se atiende dentro de su propio plazo, aunque el cambio de opinión no proceda: así el agente
+    # sabe si esa salida sigue abierta y no la ofrece cuando ya venció.
+    alternativa_defecto = {"vigente": dias <= plazo_defecto, "plazo_dias": plazo_defecto, "dias_restantes": max(plazo_defecto - dias, 0)}
     if motivo == "cambio_de_opinion":
         plazo, a_cargo, descuento = PLAZO_CAMBIO_OPINION, "cliente", DESCUENTO_ENVIO_RETORNO
         if not producto["devolucion_permitida"]:
-            # Aunque no admita devolución por cambio de opinión, un defecto se atiende dentro de su propio plazo.
-            plazo_def = PLAZO_DEFECTO_ALIMENTOS if producto["categoria"] == "Alimentos y Bebidas" else PLAZO_DEFECTO
             return {**base, "elegible": False, "razon": "CATEGORIA_NO_RETORNABLE", "dias_desde_entrega": dias,
                     "detalle": f"{producto['categoria']}: {producto['motivo_restriccion']} No admite devolución por cambio de opinión.",
-                    "alternativa_defecto": {"vigente": dias <= plazo_def, "plazo_dias": plazo_def, "dias_restantes": max(plazo_def - dias, 0)}}
+                    "alternativa_defecto": alternativa_defecto}
     else:
-        plazo = PLAZO_DEFECTO_ALIMENTOS if producto["categoria"] == "Alimentos y Bebidas" else PLAZO_DEFECTO
-        a_cargo, descuento = "ecomarket", 0
+        plazo, a_cargo, descuento = plazo_defecto, "ecomarket", 0
     if dias > plazo:
-        return {**base, "elegible": False, "razon": "FUERA_DE_PLAZO", "dias_desde_entrega": dias, "plazo_dias": plazo,
-                "detalle": f"Pasaron {dias} días desde la entrega y el plazo para este motivo es de {plazo}."}
+        fuera = {**base, "elegible": False, "razon": "FUERA_DE_PLAZO", "dias_desde_entrega": dias, "plazo_dias": plazo,
+                 "detalle": f"Pasaron {dias} días desde la entrega y el plazo para este motivo es de {plazo}."}
+        return {**fuera, "alternativa_defecto": alternativa_defecto} if motivo == "cambio_de_opinion" else fuera
     return {**base, "elegible": True, "razon": "ELEGIBLE", "dias_desde_entrega": dias, "plazo_dias": plazo,
             "dias_restantes": plazo - dias, "envio_retorno_a_cargo": a_cargo, "se_resta_del_reembolso_cop": descuento,
             "codigo_verificacion": _codigo(numero, motivo)}

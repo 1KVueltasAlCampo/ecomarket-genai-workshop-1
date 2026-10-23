@@ -1,5 +1,6 @@
 # Pruebas del proyecto final.
 #   python pruebas.py herramientas   -> pruebas de las herramientas, sin LLM (rápidas y deterministas)
+#   python pruebas.py interfaz       -> la app de Streamlit completa con modelos simulados (sin LLM)
 #   python pruebas.py agente         -> el contrato de casos_prueba.json contra el agente (usa el LLM)
 import json
 import os
@@ -19,6 +20,26 @@ resultados = []
 def verificar(nombre, condicion, detalle=""):
     resultados.append(bool(condicion))
     print(f"  {'ok   ' if condicion else 'FALLA'} {nombre}" + ("" if condicion or not detalle else f"  -> {detalle}"))
+
+
+def modelos_simulados(redactor):
+    """Reemplaza las tres llamadas a modelos del agente por versiones deterministas: el planificador siempre propone
+    la devolución completa de ORD-003, el ejecutor entrega los argumentos correctos y 'redactor' hace de modelo de
+    respuesta. Sirve para probar el grafo y la interfaz sin gastar cupo del proveedor."""
+    from contextlib import ExitStack
+    from unittest.mock import patch
+
+    import agente as a
+    plan = a.Plan(intencion="devolucion", pasos=[a.Paso(herramienta=n, objetivo="x") for n in (
+        "consultar_pedido", "verificar_elegibilidad_producto", "calcular", "generar_etiqueta_devolucion")])
+    argumentos = {"consultar_pedido": {"numero_pedido": "ORD-003"},
+                  "verificar_elegibilidad_producto": {"numero_pedido": "ORD-003", "motivo": "cambio_de_opinion"},
+                  "calcular": {"expresion": "19900 - 8000"}}
+    pila = ExitStack()
+    pila.enter_context(patch.object(a, "planificar_con_modelo", lambda m, hist: plan))
+    pila.enter_context(patch.object(a, "argumentos_del_paso", lambda paso, m, hist, hechos: argumentos[paso["herramienta"]]))
+    pila.enter_context(patch.object(a, "redactar_respuesta", redactor))
+    return pila
 
 
 def probar_herramientas():
@@ -69,7 +90,9 @@ def probar_herramientas():
     verificar("cambio de opinión: envío a cargo del cliente, descuento $8.000", r["envio_retorno_a_cargo"] == "cliente" and r["se_resta_del_reembolso_cop"] == 8000)
     r = ej("verificar_elegibilidad_producto", {"numero_pedido": "ORD-012", "motivo": "defecto_o_dano"})
     verificar("defecto: envío a cargo de EcoMarket, sin descuento", r["envio_retorno_a_cargo"] == "ecomarket" and r["se_resta_del_reembolso_cop"] == 0)
-    verificar("no elegible no entrega código", "codigo_verificacion" not in ej("verificar_elegibilidad_producto", {"numero_pedido": "ORD-008", "motivo": "cambio_de_opinion"}))
+    fuera = ej("verificar_elegibilidad_producto", {"numero_pedido": "ORD-011", "motivo": "cambio_de_opinion"})
+    verificar("fuera de plazo (46 días): también informa que el plazo de defecto venció", fuera.get("razon") == "FUERA_DE_PLAZO" and fuera.get("alternativa_defecto", {}).get("vigente") is False, str(fuera.get("alternativa_defecto")))
+    verificar("no elegible no entrega código","codigo_verificacion" not in ej("verificar_elegibilidad_producto", {"numero_pedido": "ORD-008", "motivo": "cambio_de_opinion"}))
     verificar("pedido inexistente", ej("verificar_elegibilidad_producto", {"numero_pedido": "ORD-999", "motivo": "cambio_de_opinion"}).get("error") == "PEDIDO_NO_ENCONTRADO")
     verificar("motivo fuera de lo permitido se rechaza", ej("verificar_elegibilidad_producto", {"numero_pedido": "ORD-003", "motivo": "porque si"}).get("error") == "ERROR_EN_HERRAMIENTA")
 
@@ -122,21 +145,33 @@ def probar_herramientas():
     verificar("fuentes: 'ninguna' si no se consultaron documentos", a._fuentes({"1_pedido": {"estado": "Entregado"}}) == "ninguna")
     verificar("guiones y espacios no separables pasan a normales", a._limpiar("ETQ‑123 y ORD‐011: 8 900 COP") == "ETQ-123 y ORD-011: 8 900 COP")
 
+    from unittest.mock import patch
+
+    class ModeloEspia:
+        """Reemplaza al modelo de respuesta y guarda lo que el agente le envía."""
+        enviado = None
+
+        def __init__(self, **_):
+            pass
+
+        def invoke(self, mensajes):
+            ModeloEspia.enviado = "\n".join(m.content for m in mensajes)
+            return type("R", (), {"content": "ok", "usage_metadata": None})()
+
+    os.environ.setdefault("GROQ_API_KEY", "llave-de-prueba")
+    with patch.object(a, "ChatOpenAI", ModeloEspia):
+        a.redactar_respuesta({"mensaje": "¿y el de 500 ml?", "estado": "ok", "hechos": {}, "historial": [
+            {"rol": "Cliente", "texto": "¿Cuánto cuesta el termo familiar?"}, {"rol": "Asistente", "texto": "Cuesta 99.900 pesos."}]})
+    verificar("la respuesta final recibe el historial de la conversación", "termo familiar" in (ModeloEspia.enviado or "") and "99.900" in ModeloEspia.enviado)
+
     print("fallos del modelo: el grafo completo con modelos simulados (sin LLM)")
     from unittest.mock import patch
-    plan = a.Plan(intencion="devolucion", pasos=[a.Paso(herramienta=n, objetivo="x") for n in (
-        "consultar_pedido", "verificar_elegibilidad_producto", "calcular", "generar_etiqueta_devolucion")])
-    argumentos = {"consultar_pedido": {"numero_pedido": "ORD-003"},
-                  "verificar_elegibilidad_producto": {"numero_pedido": "ORD-003", "motivo": "cambio_de_opinion"},
-                  "calcular": {"expresion": "19900 - 8000"}}
 
     def se_cae(*_, **__):
         raise RuntimeError("429 límite de uso")
 
     h.reiniciar_estado()
-    with patch.object(a, "planificar_con_modelo", lambda m, hist: plan), \
-            patch.object(a, "argumentos_del_paso", lambda paso, m, hist, hechos: argumentos[paso["herramienta"]]), \
-            patch.object(a, "redactar_respuesta", se_cae):
+    with modelos_simulados(se_cae):
         ag = a.Agente()
         r = ag.conversar("Quiero devolver el pedido ORD-003, no me gustó")
         verificar("antes de generar la etiqueta se pide la aprobación", r["pendiente"] is not None and r["pendiente"]["reembolso_estimado_cop"] == 11900)
@@ -148,6 +183,37 @@ def probar_herramientas():
     with patch.object(a, "planificar_con_modelo", se_cae):
         r = a.Agente().conversar("¿Dónde está mi pedido ORD-006?")
     verificar("si falla el planificador: mensaje claro y sin excepción", r["estado"] == "error_sistema" and r["respuesta"] == a.MENSAJE_SISTEMA and "429" not in r["respuesta"])
+
+    h.reiniciar_estado()
+    with modelos_simulados(se_cae):
+        try:
+            correr(a.Agente(), "Quiero devolver mi pedido ORD-003, no me gustó.")
+            detuvo = False
+        except RuntimeError:
+            detuvo = True
+    verificar("la evaluación se detiene si el modelo falla, en vez de guardar la respuesta de emergencia", detuvo)
+
+    print("avance en vivo y bitácora (sin LLM)")
+    h.reiniciar_estado()
+    nodos = []
+    with modelos_simulados(lambda e: "Listo"):
+        ag = a.Agente()
+        sin_avance = ag.conversar("Quiero devolver el pedido ORD-003")
+        h.reiniciar_estado()
+        r = ag.conversar("Quiero devolver el pedido ORD-003", avance=lambda nodo, cambios: nodos.append(nodo))
+        verificar("el avance informa cada nodo hasta la pausa de aprobación", nodos == ["planificar", "ejecutar", "ejecutar", "ejecutar"] and r["pendiente"] is not None, str(nodos))
+        verificar("con y sin avance se pide lo mismo al cliente", r["pendiente"] == sin_avance["pendiente"] and r.keys() == sin_avance.keys())
+        nodos.clear()
+        r2 = ag.reanudar(r["hilo"], True, avance=lambda nodo, cambios: nodos.append(nodo))
+        h.reiniciar_estado()
+        sin_avance2 = ag.reanudar(sin_avance["hilo"], True)
+        verificar("al terminar, con y sin avance el resultado es el mismo",
+                  {k: v for k, v in r2.items() if k != "hilo"} == {k: v for k, v in sin_avance2.items() if k != "hilo"})
+        verificar("al confirmar: aprobar, generar y responder", nodos == ["aprobar", "generar", "responder"] and r2["etiqueta_generada"] and r2["respuesta"] == "Listo", str(nodos))
+    eventos = h.leer_registro(r["hilo"])
+    verificar("la bitácora trae los eventos de esa conversación y solo esos",
+              {"mensaje", "herramienta", "aprobacion", "respuesta"} <= {e["evento"] for e in eventos} and all(e["hilo"] == r["hilo"] for e in eventos))
+    verificar("un prefijo desconocido no devuelve nada", h.leer_registro("no-existe") == [])
     h.reiniciar_estado()
 
     print("buscar_en_documentos: sin regresión frente al Taller 2 (23 preguntas con evidencia, k=5)")
@@ -176,11 +242,21 @@ CONTENIDO = {
     "C03": lambda t, d: "tránsito" in t.lower() and "ORD-006" in t,
     "C04": lambda t, d: "139800" in d and re.search(r"gratis|gratuit|sin costo|no pagas|no pagar", t.lower()) is not None,
     "C05": lambda t, d: "11900" in d and "ETQ-" in t,
+    "C07": lambda t, d: "46" in t and (re.search(r"dañad|defect", t.lower()) is None or re.search(r"venci|expir|no est[aá] vigente|ya no (est[aá] vigente|aplica)", t.lower()) is not None),
     "C08": lambda t, d: "ETQ-" in t,
     "C09": lambda t, d: "ORD-999" in t or "verific" in t.lower(),
     "C10": lambda t, d: "pedido" in t.lower(),
     "C13": lambda t, d: "agente" in t.lower() and "ETQ-" not in t,
 }
+
+
+def sin_fallos_del_modelo(*resultados):
+    """Si un modelo falla (por ejemplo, cupo agotado), el agente responde con un mensaje de emergencia: esa corrida
+    no mide al agente y no debe guardarse como resultado. Se detiene la evaluación y se reanuda después."""
+    for r in resultados:
+        fallos = [e for e in h.leer_registro(r["hilo"]) if e["evento"] == "fallo_interno" and e.get("etapa") in ("respuesta", "agente")]
+        if fallos:
+            raise RuntimeError("falló el modelo: " + fallos[0]["detalle"])
 
 
 def correr(agente, mensaje, historial=None, aprobar=True):
@@ -191,6 +267,7 @@ def correr(agente, mensaje, historial=None, aprobar=True):
     pidio_aprobacion = r["pendiente"] is not None
     if pidio_aprobacion:
         r = agente.reanudar(r["hilo"], aprobar)
+    sin_fallos_del_modelo(r)
     return {"mensaje": mensaje, "respuesta": r["respuesta"], "estado": r["estado"], "plan": r["plan"],
             "ejecutadas": r["pasos_ejecutados"], "pidio_aprobacion": pidio_aprobacion,
             "etiqueta_generada": r["etiqueta_generada"], "segundos": round(time.time() - inicio, 1)}
@@ -248,6 +325,7 @@ def probar_agente():
             m2 = "Es el pedido ORD-003, no me gustó."
             t2 = agente.conversar(m2, historial)
             t3 = agente.reanudar(t2["hilo"], True) if t2["pendiente"] else t2
+            sin_fallos_del_modelo(t1, t3)
             cache["S1"] = {"turno1": {"respuesta": t1["respuesta"], "ejecutadas": t1["pasos_ejecutados"]},
                            "turno2_pendiente": t2["pendiente"], "turno3": {"respuesta": t3["respuesta"], "etiqueta_generada": t3.get("etiqueta_generada")},
                            "evaluacion": {"turno1_sin_herramientas": t1["pasos_ejecutados"] == [], "aprobacion_en_turno2": t2["pendiente"] is not None,
@@ -276,8 +354,67 @@ def resumir_agente(contrato, cache):
     return True
 
 
+def probar_interfaz():
+    """La app completa (app.py) con el motor de pruebas de Streamlit y modelos simulados: no gasta cupo del proveedor."""
+    from unittest.mock import patch
+
+    from streamlit.testing.v1 import AppTest
+
+    os.environ.setdefault("GROQ_API_KEY", "llave-de-prueba")
+
+    def redactor(e):
+        etiqueta = next((v for v in e["hechos"].values() if "etiqueta_id" in v), None)
+        return f"Listo, tu etiqueta es {etiqueta['etiqueta_id']}. Reembolso estimado: $11.900." if etiqueta else "Entendido, no generé nada."
+
+    def textos(app):
+        return [m.value for m in app.markdown]
+
+    def botones(app):
+        return [b.key for b in app.button if b.key in ("confirmar", "cancelar")]
+
+    def hay_etiqueta(app, contiene=""):
+        return any('class="ardi-etiqueta"' in t and contiene in t for t in textos(app))
+
+    h.reiniciar_estado()
+    with modelos_simulados(redactor), patch.object(h, "preparar_indice", lambda: None):
+        print("interfaz: devolución completa con confirmación")
+        app = AppTest.from_file(str(RAIZ / "app.py"), default_timeout=60).run()
+        verificar("la app arranca sin errores y muestra la bienvenida", not app.exception and any("Cuéntame qué necesitas" in t for t in textos(app)))
+        app.chat_input[0].set_value("Quiero devolver mi pedido ORD-003, no me gustó").run()
+        verificar("pide la aprobación con sus dos botones", botones(app) == ["confirmar", "cancelar"] and not app.exception)
+        verificar("la tarjeta resume lo que se va a aprobar", any("ORD-003" in t and "$11.900" in t and "Kit de Pajillas" in t for t in textos(app)))
+        verificar("mientras tanto el campo de texto está desactivado", app.chat_input[0].disabled)
+        verificar("todavía no hay etiqueta", not hay_etiqueta(app))
+        app.button(key="confirmar").click().run()
+        verificar("al confirmar aparece la etiqueta", hay_etiqueta(app, "ETQ-") and botones(app) == [])
+        verificar("el monto en pesos no se interpreta como fórmula", any(r"\$11.900" in t for t in textos(app)))
+        verificar("la bitácora lista el turno, la herramienta y la aprobación",
+                  any("Turno 1" in t and "generar_etiqueta_devolucion" in t and "Aprobación" in t for t in textos(app)))
+        verificar("la bitácora resume cada resultado en una frase, sin JSON",
+                  any("ORD-003: Entregado" in t and "= 11900" in t and "elegible, quedan 12 días" in t and '{"' not in t.split("Bitácora")[-1] for t in textos(app)))
+        verificar("el campo de texto vuelve a estar activo", not app.chat_input[0].disabled)
+
+        print("interfaz: cancelación y nueva conversación")
+        h.reiniciar_estado()
+        nueva = next(b for b in app.button if b.label == "Nueva conversación")
+        nueva.click().run()
+        verificar("nueva conversación vacía", any("Cuéntame qué necesitas" in t for t in textos(app)) and not hay_etiqueta(app))
+        app.chat_input[0].set_value("Quiero devolver mi pedido ORD-003, no me gustó").run()
+        app.button(key="cancelar").click().run()
+        verificar("al cancelar no se genera ninguna etiqueta", "ORD-003" not in h._ETIQUETAS and not hay_etiqueta(app))
+        verificar("y la conversación sigue", any("no generé nada" in t for t in textos(app)) and not app.chat_input[0].disabled)
+
+        print("interfaz: sugerencias de la bienvenida")
+        nueva = next(b for b in app.button if b.label == "Nueva conversación")
+        nueva.click().run()
+        app.button(key="sugerencia-Devolver un producto").click().run()
+        verificar("una sugerencia equivale a escribir el mensaje", botones(app) == ["confirmar", "cancelar"])
+    h.reiniciar_estado()
+    print(f"\n{sum(resultados)} de {len(resultados)} pruebas superadas")
+    return all(resultados)
+
+
 if __name__ == "__main__":
     modo = sys.argv[1] if len(sys.argv) > 1 else "herramientas"
-    if modo == "herramientas":
-        sys.exit(0 if probar_herramientas() else 1)
-    sys.exit(0 if probar_agente() else 1)
+    pruebas = {"herramientas": probar_herramientas, "interfaz": probar_interfaz, "agente": probar_agente}
+    sys.exit(0 if pruebas[modo]() else 1)

@@ -5,7 +5,8 @@
     "Después de ver los resultados del planificador: se marcó 'calcular' como paso opcional en C08, igual que en C05, C06, C07, C09, C12 y C13. La omisión era una inconsistencia del contrato (los tres modelos produjeron el mismo plan razonable).",
     "Se definió la fecha de manera dual: en uso real el sistema usa hoy() (fecha del sistema) y las pruebas fijan una fecha simulada. Los pedidos de prueba pasan a definirse con 'dias_desde_entrega' (desfase relativo a hoy) en lugar de una fecha fija, para que los casos se comporten igual en cualquier día.",
     "Antes de evaluar el agente: se agregó 'herramientas_ejecutadas_esperadas' a cada caso (las herramientas que se ejecutan de verdad, que difieren de 'pasos_esperados' cuando la ejecución se detiene tras una verificación no elegible o un pedido inexistente). Coincide con la columna 'Llamadas que realiza' de la tabla de la Fase 1. 'pasos_opcionales' sigue indicando qué pasos pueden faltar sin que sea un error.",
-    "Después de leer las respuestas de la evaluación completa: C01 pasa a fallar si la respuesta suma los plazos ('8 a 10 días hábiles'), cifra que no aparece en los documentos. La verificación anterior solo comprobaba que apareciera '5 a 7' y no detectaba el plazo inventado."
+    "Después de leer las respuestas de la evaluación completa: C01 pasa a fallar si la respuesta suma los plazos ('8 a 10 días hábiles'), cifra que no aparece en los documentos. La verificación anterior solo comprobaba que apareciera '5 a 7' y no detectaba el plazo inventado.",
+    "Después de la evaluación final: C07 pasa a fallar si la respuesta ofrece revisar un defecto sin decir que ese plazo (5 días) también venció. En 2 de 3 ejecuciones el agente sugería 'revisarlo dentro del plazo correspondiente' aunque habían pasado 46 días. La herramienta de elegibilidad ahora informa 'alternativa_defecto' también en los casos fuera de plazo."
   ],
   "fecha_simulada": {
     "valor": "2026-10-21",
